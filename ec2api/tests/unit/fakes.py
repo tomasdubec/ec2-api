@@ -728,6 +728,7 @@ class OSInstance(object):
             instance_dict.get('security_groups', []))
         setattr(self, 'OS-EXT-STS:vm_state', instance_dict.get('vm_state'))
         setattr(self, 'OS-EXT-SRV-ATTR:host', instance_dict.get('host'))
+        setattr(self, 'OS-EXT-SRV-ATTR:instance_name', instance_dict.get('instance_name'))
         setattr(self, 'OS-EXT-AZ:availability_zone',
                 instance_dict.get('availability_zone'))
         setattr(self, 'os-extended-volumes:volumes_attached',
@@ -770,6 +771,8 @@ class OSInstance_full(OSInstance):
                 instance_dict.get('user_data'))
         setattr(self, 'OS-EXT-SRV-ATTR:hostname',
                 instance_dict.get('hostname'))
+        setattr(self, 'OS-EXT-SRV-ATTR:instance_name',
+                instance_dict.get('instance_name'))
 
 OS_INSTANCE_1 = {
     'id': ID_OS_INSTANCE_1,
@@ -793,6 +796,7 @@ OS_INSTANCE_1 = {
     'kernel_id': ID_OS_IMAGE_AKI_1,
     'ramdisk_id': ID_OS_IMAGE_ARI_1,
     'hostname': '%s-%s' % (ID_EC2_RESERVATION_1, 0),
+    'instance_name': ID_EC2_INSTANCE_1,
     'created': TIME_CREATE_INSTANCE_1
 }
 OS_INSTANCE_2 = {
@@ -812,6 +816,7 @@ OS_INSTANCE_2 = {
                           'delete_on_termination': False}],
     'user_data': USER_DATA_INSTANCE_2,
     'hostname': 'Server %s' % ID_OS_INSTANCE_2,
+    'instance_name': ID_EC2_INSTANCE_2,
     'created': TIME_CREATE_INSTANCE_2
 }
 

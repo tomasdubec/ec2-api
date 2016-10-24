@@ -97,6 +97,11 @@ def add_item(context, kind, data):
         "project_id": context.project_id,
         "id": _new_id(kind),
     })
+    try:
+        item_ref['id'] = data['ec2_id']
+    except KeyError as e:
+        pass
+
     item_ref.update(_pack_item_data(data))
     try:
         item_ref.save()

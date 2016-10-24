@@ -288,6 +288,12 @@ def register_auto_create_db_item_extension(kind, extension):
 
 def auto_create_db_item(context, kind, os_id, **extension_kwargs):
     item = {'os_id': os_id}
+    try:
+        os_instance = extension_kwargs['os_instance']
+        item['ec2_id'] = getattr(os_instance, 'OS-EXT-SRV-ATTR:instance_name')
+    except KeyError as e:
+        pass
+
     extension = _auto_create_db_item_extensions.get(kind)
     if extension:
         extension(context, item, **extension_kwargs)
